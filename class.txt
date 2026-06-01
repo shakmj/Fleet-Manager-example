@@ -1,0 +1,58 @@
+# verified, first to run.
+class Vehicle_fleet: 
+    #version 0.1 18/5/2026
+    def __init__(self, registeration_date, Model_brand, chassis_number, Next_check_date):
+        self.registeration_date = registeration_date;
+        self.Model_brand = Model_brand;
+        self.chassis_number = chassis_number;
+        self.Next_check_date = Next_check_date;
+    def set_power_train(self, power_train_object): 
+        self.power_train = power_train_object;                        # aggregation
+        # engine_model,engine_number, past_km, gearbox_type):
+        #pwr_train_prp( engine_model,engine_number, past_km, gearbox_type);    
+    def set_owner(self, name, vehicle_number):                       # association
+        self.ownerName = name;
+        self.vehiclePlateNumber = vehicle_number; 
+    def set_other_prp(self, coolant, body_color, Ecu_version):      # composition
+        self.other_prp = other_properties( coolant , body_color , Ecu_version);
+    
+class other_properties:
+    def __init__(self , coolant, body_color, ecu_version):
+        self.coolant = coolant;
+        self.body_color = body_color;
+        self.ecu_version = ecu_version;
+class owners:
+    def __init__(self,Owner,vehicle_plate_number):
+        self.vehicle_plate_number = vehicle_plate_number;
+        self.Owner_name = Owner; 
+class pwr_train_prp:
+    def __init__(self, engine_model,engine_number, past_km, gearbox_type): # to be separated subclass:
+        #print("fff");
+        self.engine_model = engine_model;
+        self.engine_number = engine_number;
+        self.past_km = past_km;
+        # to be in another subclass
+        self.gearbox_type = gearbox_type;
+        # gearbox_oil_type, last_change_gp_oil
+
+veh1 = Vehicle_fleet( "1.03.2010" , "VW_GOLF_2009", "SSN246758","30.6.2027");
+owner_mHadi = owners("m.Hadi" , "KL 1995");
+veh1.set_owner( owner_mHadi.Owner_name, owner_mHadi.vehicle_plate_number);    # association or? 
+print(owner_mHadi.Owner_name) 
+print(veh1.Model_brand , veh1.ownerName , veh1.Next_check_date) 
+veh2 = Vehicle_fleet( "1.05.2010" , "VW_GOLF_2009", "SSN246338","30.11.2027");
+owner_mRadi = owners("m.Radi" , "KL 1990");
+veh2.set_owner( owner_mRadi.Owner_name, owner_mRadi.vehicle_plate_number );
+print(owner_mRadi.Owner_name) 
+print(veh2.Model_brand , veh2.ownerName , veh2.Next_check_date) 
+#####
+pwr_train_1 = pwr_train_prp("tdi_eco",int(3435667),int(110050),"auto");
+veh1.set_power_train(pwr_train_1);                                           #  aggregation!
+print(veh1.power_train.engine_model)
+pwr_train_2 = pwr_train_prp("tdi_eco",int(3155677),int(130050),"auto");
+veh2.set_power_train( pwr_train_2);
+print(veh2.power_train.engine_model)
+                                                                                #### composition
+veh1.set_other_prp("bw40", "RED" , "ep1154");
+veh1.set_other_prp("bw40", "blue" , "ep1154");
+print(veh1.other_prp.coolant);
