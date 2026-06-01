@@ -1,2 +1,1 @@
-<img width="3252" height="3900" alt="0399-a-cheatsheet-for-uml-class-diagrams" src="https://github.com/user-attachments/assets/9cf85a49-ced3-4724-b2da-3bfa9c89fc01" />
-
+<img width="758" height="290" alt="vehicle fleet drawio" src="https://github.com/user-attachments/assets/46621643-69b5-4276-bbb3-293a739f698e" />
